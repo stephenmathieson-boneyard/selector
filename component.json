@@ -1,0 +1,16 @@
+{
+  "name": "selector",
+  "repo": "stephenmathieson/selector",
+  "description": "Convenience methods for document.querySelector[All]",
+  "version": "0.0.1",
+  "keywords": [],
+  "development": {
+    "visionmedia/mocha": "*",
+    "rowanmanning/proclaim": "*",
+    "component/each": "*"
+  },
+  "license": "MIT",
+  "scripts": [
+    "index.js"
+  ]
+}

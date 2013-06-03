@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <title>selector()</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/components/visionmedia-mocha/mocha.css">
+    <script src="/components/visionmedia-mocha/mocha.js"></script>
+    <script src="/components/rowanmanning-proclaim/lib/proclaim.js"></script>
+    <script>
+      mocha.setup('bdd')
+      assert = proclaim
+    </script>
+    <script src="/build/build.js"></script>
+  </head>
+  <body>
+    <div id="main" style="display:none">
+      <p>hi</p>
+      <b>bye</b>
+      <i>hello</i>
+      <u>fnord</u>
+    </div>
+    <div id="mocha"></div>
+    <script>
+      var selector = require('selector')
+
+      describe('selector', function () {
+
+        it('should be a function', function () {
+          assert.isFunction(selector)
+        })
+
+        it('should be aliased as "selector.queryAll"', function () {
+          assert.strictEqual(selector, selector.queryAll)
+        })
+
+        describe('selector.queryAll', function () {
+          it('should return an array', function () {
+            assert.isArray(selector.queryAll('*'))
+            assert.isArray(selector('*'))
+            assert.equal(Object.prototype.toString.call(selector('*')), '[object Array]')
+            assert.isArray(selector.queryAll('foo'))
+            assert.isArray(selector('foo'))
+            assert.isArray(selector.queryAll('u'))
+            assert.isArray(selector('u'))
+            assert.isArray(selector.queryAll('#main'))
+            assert.isArray(selector('#main'))
+          })
+
+          it('should take a context', function () {
+            var expected = document.querySelectorAll('#main *'),
+                each = require('component-each')
+
+            function check(res) {
+              assert.length(res, expected.length)
+
+              each(expected, function (element) {
+                assert.includes(res, element)
+              })
+            }
+
+            check(selector('*', '#main'))
+            check(selector('*', document.getElementById('main')))
+            check(selector.queryAll('*', '#main'))
+            check(selector.queryAll('*', document.getElementById('main')))
+          })
+        })
+
+        describe('selector.query', function () {
+          it('should take a context', function () {
+            var expected = document.querySelector('#main u')
+
+            assert.strictEqual(selector.query('u', '#main'), expected)
+            assert.strictEqual(selector.query('u', document.getElementById('main')), expected)
+          })
+        })
+
+      })
+
+      mocha.run()
+    </script>
+  </body>
+</html>
