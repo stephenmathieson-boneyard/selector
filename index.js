@@ -1,12 +1,14 @@
 
 var pre = [
       // prefixes to Element#matchesSelector
-      'o', 'ms', 'moz', 'webkit', ''
-    ]
+      'o', 'ms', 'moz', 'webkit'
+    ],
+    method = 'matchesSelector'
 
-for (var method, index = pre.length - 1; method = pre[index] + 'matchesSelector', index >= 0; index--)
-  if (Element.prototype[method])
-    break
+if (!Element.prototype[method])
+  for (var index = pre.length - 1; method = pre[index] + 'MatchesSelector', index >= 0; index--)
+    if (Element.prototype[method])
+      break
 
 /**
  * Turn a `list` into an `array`

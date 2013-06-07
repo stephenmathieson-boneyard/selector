@@ -51,6 +51,7 @@
                 each = require('component-each')
 
             function check(res) {
+              assert.ok(res.length);
               assert.length(res, expected.length)
 
               each(expected, function (element) {

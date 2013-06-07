@@ -51,11 +51,15 @@ selector.matches(div, '#main[data-foo]') //=> true
 
 ## Revision History
 
-### 0.1.0 (6/4/13)
+### 0.1.1 
+
+- Fix native `{prefix}MatchesSelector` usage
+
+### 0.1.0 
 
 - Added `selector.matches`
 
-### 0.0.1 (6/3/13)
+### 0.0.1 
 
 - Initial release
 
