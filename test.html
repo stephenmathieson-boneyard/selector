@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
   <head>
     <title>selector()</title>
@@ -14,9 +15,9 @@
   <body>
     <div id="main" style="display:none">
       <p>hi</p>
-      <b>bye</b>
-      <i>hello</i>
-      <u>fnord</u>
+      <b data-foo="bar">bye</b>
+      <i class="œ∑´®†¥¨ˆøπ">hello</i>
+      <u><u id="middle"><u>fnord</u></u></u>
     </div>
     <div id="mocha"></div>
     <script>
@@ -70,6 +71,47 @@
 
             assert.strictEqual(selector.query('u', '#main'), expected)
             assert.strictEqual(selector.query('u', document.getElementById('main')), expected)
+          })
+        })
+
+        describe('selector.matches', function () {
+          var p, b, i, u
+
+          before(function () {
+            p = selector.query('#main p')
+            b = selector.query('#main b')
+            i = selector.query('#main i')
+            u = selector.query('#middle')
+          })
+
+          it('should be a function', function () {
+            assert.isFunction(selector.matches)
+          })
+
+          it('should work', function () {
+            assert.isTrue(selector.matches(p, 'p'))
+            assert.isTrue(selector.matches(b, 'b'))
+            assert.isTrue(selector.matches(b, '[data-foo]'))
+            assert.isTrue(selector.matches(b, '[data-foo="bar"]'))
+            assert.isTrue(selector.matches(i, 'i'))
+            assert.isTrue(selector.matches(i, '[class]'))
+            assert.isTrue(selector.matches(i, '[class="œ∑´®†¥¨ˆøπ"]'))
+            assert.isTrue(selector.matches(u, 'u'))
+            assert.isTrue(selector.matches(u, '#middle'))
+            assert.isTrue(selector.matches(u, 'u#middle'))
+          })
+
+          it('should handle parent-node relationships', function () {
+            assert.isTrue(selector.matches(p, 'html body div p'))
+            assert.isTrue(selector.matches(p, '#main p'))
+          })
+
+          it('should handle unicode', function () {
+            assert.isTrue(selector.matches(i, '.œ∑´®†¥¨ˆøπ'))
+          })
+
+          it('should handle descendants', function () {
+            assert.isTrue(selector.matches(u, '#main u > u'))
           })
         })
 

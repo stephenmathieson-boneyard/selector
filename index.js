@@ -1,4 +1,13 @@
 
+var pre = [
+      // prefixes to Element#matchesSelector
+      'o', 'ms', 'moz', 'webkit', ''
+    ]
+
+for (var method, index = pre.length - 1; method = pre[index] + 'matchesSelector', index >= 0; index--)
+  if (Element.prototype[method])
+    break
+
 /**
  * Turn a `list` into an `array`
  *
@@ -63,4 +72,24 @@ selector.queryAll = selector;
  */
 selector.query = function (css, root) {
   return context(root).querySelector(css)
+}
+
+/**
+ * Check if an `element` matches a `css`-style selector
+ *
+ * @api public
+ * @param {HTMLElement} element
+ * @param {String} css
+ * @return {Boolean}
+ */
+selector.matches = function (element, css) {
+  var nodes, index
+
+  if (element[method])
+    return element[method](css)
+
+  nodes = selector(css)
+  for (index = nodes.length - 1; index >= 0; index--)
+    if (nodes[index] === element)
+      return true
 }
