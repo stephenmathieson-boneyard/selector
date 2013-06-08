@@ -94,4 +94,6 @@ selector.matches = function (element, css) {
   for (index = nodes.length - 1; index >= 0; index--)
     if (nodes[index] === element)
       return true
+
+  return false
 }

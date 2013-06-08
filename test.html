@@ -114,6 +114,12 @@
           it('should handle descendants', function () {
             assert.isTrue(selector.matches(u, '#main u > u'))
           })
+
+          it('should return explicit booleans', function () {
+            assert.isTrue(selector.matches(u, '#main u > u'))
+            assert.isFalse(selector.matches(u, 'div'))
+          })
+
         })
 
       })
