@@ -2,7 +2,7 @@
   "name": "selector",
   "repo": "stephenmathieson/selector",
   "description": "Convenience methods for document.querySelector[All]",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "keywords": [],
   "development": {
     "visionmedia/mocha": "*",

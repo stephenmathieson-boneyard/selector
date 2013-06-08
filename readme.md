@@ -51,6 +51,10 @@ selector.matches(div, '#main[data-foo]') //=> true
 
 ## Revision History
 
+### 0.1.2
+
+- `selector.matches` now returns explicitly `false` in IE8 on non-matching nodes
+
 ### 0.1.1 
 
 - Fix native `{prefix}MatchesSelector` usage
